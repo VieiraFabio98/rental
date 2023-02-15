@@ -1,6 +1,6 @@
-import { Category } from "../model/Category";
+import { Category } from "../../model/Category";
 import { ICategoriesRepository,
-   ICreateCategoryDTO } from "./ICategoriesRepository";
+   ICreateCategoryDTO } from "../ICategoriesRepository";
 
 //singleton
 
