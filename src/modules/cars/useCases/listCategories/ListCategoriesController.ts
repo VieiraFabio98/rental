@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { ListCategoriesUseCase } from "./ListCategoriesUseCase";
 
-class ListCategoryController{
+class ListCategoriesController{
 
   constructor(private listCategoriesUseCase: ListCategoriesUseCase){
   
@@ -13,4 +13,4 @@ class ListCategoryController{
   }
 };
 
-export { ListCategoryController };
+export { ListCategoriesController };
