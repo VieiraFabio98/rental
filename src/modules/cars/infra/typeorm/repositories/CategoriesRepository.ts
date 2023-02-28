@@ -1,7 +1,7 @@
 import { getRepository, Repository } from "typeorm";
-import { Category } from "../../entities/Category";
+import { Category } from "../entities/Category";
 import { ICategoriesRepository,
-   ICreateCategoryDTO } from "../ICategoriesRepository";
+   ICreateCategoryDTO } from "@modules/cars/repositories/ICategoriesRepository";
 
 //singleton
 class CategoriesRepository implements ICategoriesRepository {
