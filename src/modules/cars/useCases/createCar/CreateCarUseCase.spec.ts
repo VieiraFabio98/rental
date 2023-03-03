@@ -59,7 +59,7 @@ describe("Create Car", () => {
       License_plate: "ABCD-1234",
       fine_amount: 100,
       brand: "car brand",
-      category_id: "category"
+      category_id: "category",
     });
     expect(car.available).toBe(true);
   })
