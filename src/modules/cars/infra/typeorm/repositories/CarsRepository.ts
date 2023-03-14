@@ -22,7 +22,7 @@ class CarsRepository implements ICarsRepository {
     name, 
     specifications, 
     id}: ICreateCarDTO): Promise<Car> {
-    const car = this.repository.create({
+      const car = this.repository.create({
       brand,
       category_id,
       daily_rate,
@@ -37,45 +37,56 @@ class CarsRepository implements ICarsRepository {
     await this.repository.save(car);
     return car;
   }
-   
+  
   async findByLicensePlate(License_plate: string): Promise<Car> {
     const car = await this.repository.findOne({
       License_plate,
     });
     return car;
   };
-
+  
   async findAvailable(
     brand?: string, 
     category_id?: string, 
     name?: string
     ): Promise<Car[]> {
       
-    const carsQuery = await this.repository
-    .createQueryBuilder("c")
-    .where("available = :available", { available: true});
+      const carsQuery = await this.repository
+      .createQueryBuilder("c")
+      .where("available = :available", { available: true});
+      
+      if(brand) {
+        carsQuery.andWhere("c.brand = :brand", { brand })
+      }
+      
+      if(name) {
+        carsQuery.andWhere("c.name = :name", { name })
+      }
+      
+      if(category_id) {
+        carsQuery.andWhere("c.category_id = :category_id", { category_id })
+      }
+      
+      const cars = await carsQuery.getMany();
+      
+      return cars;
+    }
     
-    if(brand) {
-      carsQuery.andWhere("c.brand = :brand", { brand })
+    async findById(id: string): Promise<Car> {
+      const car = await this.repository.findOne(id);
+      return car;
     }
 
-    if(name) {
-      carsQuery.andWhere("c.name = :name", { name })
+    async updateAvailable(id: string, available: boolean): Promise<void> {
+      await this.repository
+      .createQueryBuilder()
+      .update()
+      .set({available})
+      .where("id = :id")
+      .setParameters({id})
+      .execute()
     }
 
-    if(category_id) {
-      carsQuery.andWhere("c.category_id = :category_id", { category_id })
-    }
-
-    const cars = await carsQuery.getMany();
-
-    return cars;
   }
   
-  async findById(id: string): Promise<Car> {
-    const car = await this.repository.findOne(id);
-    return car;
-  }
-}
-
-export { CarsRepository };
+  export { CarsRepository };
