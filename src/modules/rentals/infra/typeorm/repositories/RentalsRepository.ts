@@ -51,8 +51,13 @@ class RentalsRepository implements IRentalsRepository {
     return rentalId;
   }
 
-  findByUser(user_id: string): Promise<Rental[]> {
-    throw new Error("Method not implemented.");
+  async findByUser(user_id: string): Promise<Rental[]> {
+    const rentals = await this.repository.find({
+      where: { user_id },
+      relations: ["car"]
+    });
+
+    return rentals;
   }
   
 }
