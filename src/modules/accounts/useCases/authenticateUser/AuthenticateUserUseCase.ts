@@ -39,7 +39,7 @@ class AuthenticateUserUseCase {
     const { 
       expires_in_token, 
       secret_token, 
-      secrete_refresh_token, 
+      secret_refresh_token, 
       expires_in_refresh_token,
     expires_refresh_token_days
     } = auth;
@@ -59,12 +59,12 @@ class AuthenticateUserUseCase {
       expiresIn: expires_in_token
     });
 
-    const refresh_token= sign({ email }, secrete_refresh_token, {
+    const refresh_token= sign({ email }, secret_refresh_token, {
       subject: user.id,
       expiresIn: expires_in_refresh_token
     })
 
-    const refresh_token_expires_date = this.dateProvider.addDays(expires_refresh_token_days)
+    const refresh_token_expires_date = this.dateProvider.addDays(expires_refresh_token_days);
 
     await this.usersTokensRepository.create({
       expires_date:refresh_token_expires_date ,
