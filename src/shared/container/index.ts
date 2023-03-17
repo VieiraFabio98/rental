@@ -47,3 +47,4 @@ container.registerSingleton<IRentalsRepository>
 
 container.registerSingleton<IUsersTokensRepository>
 ("UsersTokensRepository", UsersTokensRepository)
+
