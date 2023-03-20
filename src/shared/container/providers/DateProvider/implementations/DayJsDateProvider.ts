@@ -13,7 +13,7 @@ class DayJsDateProvider implements IDateProvider{
     
     return dayjs(end_date_utc).diff(start_date_utc, "hours");
   }
-
+  
   convertToUTC(date: Date): string {
     return dayjs(date)
     .utc()
@@ -24,14 +24,14 @@ class DayJsDateProvider implements IDateProvider{
   dateNow(): Date {
     return dayjs().toDate();
   }
-
+  
   compareInDays(start_date: Date, end_date: Date): number {
     const end_date_utc = this.convertToUTC(end_date);
     const start_date_utc = this.convertToUTC(start_date);
     
     return dayjs(end_date_utc).diff(start_date_utc, "days");
   };
-
+  
   addDays(days: number) {
     return dayjs().add(days, "days").toDate()
   };
@@ -40,6 +40,10 @@ class DayJsDateProvider implements IDateProvider{
     return dayjs().add(hours, "hour").toDate();
   }
   
+  compareIfBefore(start_date: Date, end_date: Date): boolean {
+    return dayjs(start_date).isBefore(end_date)
+  }
+
 }
 
 export { DayJsDateProvider };
