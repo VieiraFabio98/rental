@@ -43,10 +43,8 @@ class CreateRentalUseCase {
     const rentalOpenToUSer = await this.rentalsRepository.findOpenRentalByUser(user_id);
 
     if(rentalOpenToUSer){
-      throw new AppError("There is a rental is progress");
+      throw new AppError("There is a rental is progress for user!");
     };
-
-    const expectedReturnDateFormat = this.dateProvider.convertToUTC(expected_return_date);
 
     const dateNow = this.dateProvider.dateNow();
 

@@ -9,9 +9,9 @@ class ListCategoriesUseCase{
     private categoriesRepository: ICategoriesRepository) {};
 
   async execute(): Promise<Category[]>{
-    const categoires = await this.categoriesRepository.list();
+    const categories = await this.categoriesRepository.list();
     
-    return categoires;
+    return categories;
   }
 
 }

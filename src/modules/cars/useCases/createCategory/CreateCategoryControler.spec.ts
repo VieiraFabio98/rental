@@ -4,7 +4,7 @@ import { Connection } from "typeorm";
 import { v4 as uuid } from "uuid";
 
 import { app } from "@shared/infra/http/app";
-import { createConnection } from "typeorm";
+import createConnection from "@shared/infra/database-typeorm"
 
 let connection: Connection;
 describe("Create Category Controller", () => {
@@ -23,7 +23,7 @@ describe("Create Category Controller", () => {
   });
 
   afterAll(async () => {
-    // await connection.dropDatabase();
+    await connection.dropDatabase();
     await connection.close();
   });
 
@@ -45,12 +45,12 @@ describe("Create Category Controller", () => {
         Authorization: `Bearer ${refresh_token}`,
       });
 
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(401);
   });
 
   it("should not be able to create a new category with name exists", async () => {
     const responseToken = await request(app).post("/sessions").send({
-      email: "admin@admin.com.br",
+      email: "admin@admin.com",
       password: "admin",
     });
 

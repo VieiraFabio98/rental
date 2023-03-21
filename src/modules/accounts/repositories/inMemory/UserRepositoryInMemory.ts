@@ -18,7 +18,7 @@ class UsersRepositoryInMemory implements IUsersRepository {
       email,
       name,
       password,
-    });
+    }); 
     this.users.push(user);
   }
   async findByEmail(email: string): Promise<User> {
